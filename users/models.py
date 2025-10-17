@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 
 
 class User(AbstractUser):
@@ -10,6 +11,11 @@ class User(AbstractUser):
         verbose_name="Email",
     )
 
+    birth_date = models.DateField(
+        blank=True,
+        null=True,
+    )
+
     phone_number = models.CharField(
         max_length=25,
         verbose_name="Телефон",
@@ -17,12 +23,8 @@ class User(AbstractUser):
         null=True,
     )
 
-    city = models.CharField(
-        max_length=100,
-        verbose_name="Город",
-        blank=True,
-        null=True,
-    )
+    created_at = models.DateTimeField(default=timezone.now)
+    edited_at = models.DateTimeField(auto_now=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
