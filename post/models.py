@@ -52,6 +52,8 @@ class Post(models.Model):
         Commentary,
         verbose_name='Комментарии',
         related_name='posts',
+        blank=True,
+        null=True,
     )
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
