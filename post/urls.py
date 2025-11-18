@@ -1,6 +1,5 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
-
 from post.apps import PostConfig
 from post.views import PostViewSet
 
