@@ -125,9 +125,3 @@ class PostViewSet(ModelViewSet):
 #
 #         return Response({"message": message})
 #
-#
-# # class CurrentUserAPIView(APIView):
-# #     def get_serializer_context(self):
-# #         context = super().get_serializer_context()
-# #         context['request'] = self.request
-# #         return context
