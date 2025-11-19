@@ -9,6 +9,7 @@
 # from django.shortcuts import get_object_or_404
 # from rest_framework.response import Response
 # from materials.tasks import send_update_mail
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from post.models import Commentary, Post
@@ -24,6 +25,17 @@ class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
+    def get_permissions(self):
+        self.permission_classes = []
+
+        if self.action == 'create':
+            self.permission_classes = [IsAuthenticated]
+
+        
+
+
+
+        return [permission() for permission in self.permission_classes]
     # def perform_create(self, serializer):
     #      serializer.validated_data["owner"] = self.request.user
     #      serializer.save()
