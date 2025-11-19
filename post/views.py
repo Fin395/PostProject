@@ -24,8 +24,10 @@ class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
-
-
+    # def perform_create(self, serializer):
+    #      serializer.validated_data["owner"] = self.request.user
+    #      serializer.save()
+    #
 
 # class CourseViewSet(ModelViewSet):
 #     serializer_class = CourseSerializer
