@@ -4,8 +4,7 @@ from django.utils import timezone
 
 
 class User(AbstractUser):
-    username = None
-
+    username = models.CharField(unique=True, verbose_name="Имя пользователя", blank=True, null=True)
     email = models.EmailField(
         unique=True,
         verbose_name="Email",
@@ -26,8 +25,8 @@ class User(AbstractUser):
     created_at = models.DateTimeField(default=timezone.now)
     edited_at = models.DateTimeField(auto_now=True)
 
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username',]
 
     class Meta:
         verbose_name = "Пользователь"

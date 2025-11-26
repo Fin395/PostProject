@@ -32,3 +32,6 @@ urlpatterns = [
     # ),
     # path("subs/create/", SubscriptionAPIView.as_view(), name="subs-create"),
 ] + router.urls
+
+
+

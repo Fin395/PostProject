@@ -14,6 +14,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from post.models import Commentary, Post
 from post.serializers import CommentarySerializer, PostSerializer
+# from users.permissions import IsOwnerOrAdmin
 
 
 class CommentaryViewSet(ModelViewSet):
@@ -31,7 +32,9 @@ class PostViewSet(ModelViewSet):
         if self.action == 'create':
             self.permission_classes = [IsAuthenticated]
 
-        
+        elif self.action in ['update', 'partial_update']:
+            self.permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
+
 
 
 
@@ -138,3 +141,12 @@ class PostViewSet(ModelViewSet):
 #             message = "подписка добавлена"
 #
 #         return Response({"message": message})
+
+
+
+
+
+
+
+
+
