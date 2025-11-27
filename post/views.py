@@ -24,6 +24,21 @@ class CommentaryViewSet(ModelViewSet):
     serializer_class = CommentarySerializer
     queryset = Commentary.objects.all()
 
+    def get_permissions(self):
+        self.permission_classes = []
+
+        if self.action == 'create':
+            self.permission_classes = [IsAuthenticated]
+
+        elif self.action in ['update', 'partial_update', 'destroy']:
+            self.permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
+
+        return [permission() for permission in self.permission_classes]
+
+    def perform_create(self, serializer):
+         serializer.validated_data["author"] = self.request.user
+         serializer.save()
+
 
 class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
@@ -35,17 +50,17 @@ class PostViewSet(ModelViewSet):
         if self.action == 'create':
             self.permission_classes = [IsAuthenticated]
 
-        elif self.action in ['update', 'partial_update']:
+        elif self.action in ['update', 'partial_update', 'destroy']:
             self.permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
 
-
-
-
         return [permission() for permission in self.permission_classes]
-    # def perform_create(self, serializer):
-    #      serializer.validated_data["owner"] = self.request.user
-    #      serializer.save()
-    #
+
+    def perform_create(self, serializer):
+         serializer.validated_data["author"] = self.request.user
+         serializer.save()
+
+
+
 
 # class CourseViewSet(ModelViewSet):
 #     serializer_class = CourseSerializer
