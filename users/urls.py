@@ -12,28 +12,29 @@ from users.apps import UsersConfig
 # )
 from rest_framework.permissions import AllowAny
 
-from users.views import UserViewSet
+from users.views import UserCreateAPIView
 
 app_name = UsersConfig.name
 
-router = DefaultRouter()
-router.register(r"users", UserViewSet, basename="users")
+# router = DefaultRouter()
+# router.register(r"users", UserViewSet, basename="users")
 
-urlpatterns = [
-    # path("user/register/", UserCreateAPIView.as_view(), name="user-register"),
+urlpatterns = ([
+    path("user/register/", UserCreateAPIView.as_view(), name="user-register"),
     # path("user/update/<int:pk>/", UserUpdateAPIView.as_view(), name="user-update"),
     # path("payments/", PaymentsListAPIView.as_view(), name="payments-list"),
     # path("user/<int:pk>/", UserRetrieveAPIView.as_view(), name="user-get"),
     path(
-        'token/',
+        "token/",
         TokenObtainPairView.as_view(permission_classes=(AllowAny,)),
-        name='token_obtain_pair',
+        name="token_obtain_pair",
     ),
     path(
-        'token/refresh',
+        "token/refresh",
         TokenRefreshView.as_view(permission_classes=(AllowAny,)),
-        name='token_refresh',
+        name="token_refresh",
     ),
     # path("users/", UserListAPIView.as_view(), name="user-list"),
     # path("user/delete/<int:pk>/", UserDestroyAPIView.as_view(), name="user-delete"),
-] + router.urls
+])
+# + router.urls)

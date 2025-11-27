@@ -14,6 +14,9 @@ from rest_framework.viewsets import ModelViewSet
 
 from post.models import Commentary, Post
 from post.serializers import CommentarySerializer, PostSerializer
+from users.permissions import IsOwnerOrAdmin
+
+
 # from users.permissions import IsOwnerOrAdmin
 
 
