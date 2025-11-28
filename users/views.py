@@ -1,15 +1,16 @@
+from django.shortcuts import get_object_or_404
+from django.template.context_processors import request
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from users.models import User
-from users.permissions import IsAdmin
+from users.permissions import IsAdminOrProfileOwner, IsAdmin
 from users.serializers import UserSerializer, UserReducedSerializer
 
 
 class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
-    permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
         user = serializer.save(is_active=True)
@@ -17,30 +18,34 @@ class UserCreateAPIView(generics.CreateAPIView):
         user.save()
 
 
-# class UserUpdateAPIView(generics.UpdateAPIView):
-#     serializer_class = UserSerializer
-#     queryset = User.objects.all()
-#     permission_classes = [IsAuthenticated, IsProfileOwner]
+class UserUpdateAPIView(generics.UpdateAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated, IsAdminOrProfileOwner]
 
 
 class UserRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = UserReducedSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated, IsAdmin]
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
-        if self.request.user == self.get_object():
+        if self.request.user.is_staff or self.request.user == self.get_object():
             return UserSerializer
-        return UserReducedSerializer
+        else:
+            return UserReducedSerializer
 
 
 class UserListAPIView(generics.ListAPIView):
-    serializer_class = UserReducedSerializer
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return UserSerializer
+        else:
+            return UserReducedSerializer
+
+
+class UserDestroyAPIView(generics.DestroyAPIView):
     queryset = User.objects.all()
     permission_classes = [IsAuthenticated, IsAdmin]
-
-
-# class UserDestroyAPIView(generics.DestroyAPIView):
-#     queryset = User.objects.all()
-#     permission_classes = [IsAuthenticated]
-
