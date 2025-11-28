@@ -6,11 +6,11 @@ from users.models import User
 class Commentary(models.Model):
     author = models.ForeignKey(
         User,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         verbose_name='Автор',
-        blank=True,
-        null=True,
         related_name='commentaries',
+        blank=True,
+        null=True
     )
     content = models.TextField(
         verbose_name="Текст",
