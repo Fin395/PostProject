@@ -9,8 +9,6 @@ class Commentary(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Автор',
         related_name='commentaries',
-        blank=True,
-        null=True
     )
     content = models.TextField(
         verbose_name="Текст",
@@ -45,8 +43,6 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Автор',
         related_name='posts',
-        blank=True,
-        null=True,
     )
     commentary = models.ForeignKey(
         Commentary,
