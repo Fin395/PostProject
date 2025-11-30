@@ -1,26 +1,12 @@
-# from rest_framework.viewsets import ModelViewSet
-# from rest_framework.views import APIView
-# from rest_framework.permissions import IsAuthenticated
-# from materials.models import Course, Lesson, Subscription
-# from materials.paginators import CustomPagination
-# from materials.serializers import CourseSerializer, LessonSerializer
-# from users.permissions import IsModerator, IsOwner
-# from django.shortcuts import get_object_or_404
-# from rest_framework.response import Response
-# from materials.tasks import send_update_mail
 from datetime import date
 
+from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-from rest_framework import serializers
-
 
 from post.models import Commentary, Post
 from post.serializers import CommentarySerializer, PostSerializer
 from users.permissions import IsOwnerOrAdmin
-
-
-# from users.permissions import IsOwnerOrAdmin
 
 
 class CommentaryViewSet(ModelViewSet):

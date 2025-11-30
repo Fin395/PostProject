@@ -30,9 +30,6 @@ class PasswordLengthValidator:
                     "The password must consist of at least 8 symbols"
                 )
 
-        # elif not any(symbol.isdigit() for symbol in tmp_value):
-        #     raise serializers.ValidationError('The password must contain at least one digit')
-
 
 class PasswordDigitsValidator:
     def __init__(self, field):

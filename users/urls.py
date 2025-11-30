@@ -1,21 +1,14 @@
 from django.urls import path
-from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from users.apps import UsersConfig
 from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
 
-from users.views import (
-    UserCreateAPIView,
-    UserRetrieveAPIView,
-    UserListAPIView,
-    UserUpdateAPIView,
-    UserDestroyAPIView,
-)
+from users.apps import UsersConfig
+from users.views import (UserCreateAPIView, UserDestroyAPIView,
+                         UserListAPIView, UserRetrieveAPIView,
+                         UserUpdateAPIView)
 
 app_name = UsersConfig.name
-
-# router = DefaultRouter()
-# router.register(r"users", UserViewSet, basename="users")
 
 urlpatterns = [
     path("user/register/", UserCreateAPIView.as_view(), name="user-register"),
@@ -34,4 +27,3 @@ urlpatterns = [
     path("users/", UserListAPIView.as_view(), name="user-list"),
     path("user/delete/<int:pk>/", UserDestroyAPIView.as_view(), name="user-delete"),
 ]
-# + router.urls)

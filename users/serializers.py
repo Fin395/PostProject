@@ -1,11 +1,8 @@
 from rest_framework import serializers
 
 from users.models import User
-from users.validators import (
-    EmailValidator,
-    PasswordLengthValidator,
-    PasswordDigitsValidator,
-)
+from users.validators import (EmailValidator, PasswordDigitsValidator,
+                              PasswordLengthValidator)
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -1,12 +1,9 @@
-from django.shortcuts import get_object_or_404
-from django.template.context_processors import request
 from rest_framework import generics
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 from users.models import User
-from users.permissions import IsAdminOrProfileOwner, IsAdmin
-from users.serializers import UserSerializer, UserReducedSerializer
+from users.permissions import IsAdmin, IsAdminOrProfileOwner
+from users.serializers import UserReducedSerializer, UserSerializer
 
 
 class UserCreateAPIView(generics.CreateAPIView):
