@@ -42,18 +42,17 @@ class Post(models.Model):
     )
     author = models.ForeignKey(
         User,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         verbose_name='Автор',
-        blank=True,
-        null=True,
         related_name='posts'
     )
-    commentary = models.ManyToManyField(
+    commentary = models.ForeignKey(
         Commentary,
+        on_delete=models.SET_NULL,
         verbose_name='Комментарии',
         related_name='posts',
         blank=True,
-        null=True,
+        null=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)

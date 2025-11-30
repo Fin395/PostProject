@@ -9,10 +9,7 @@ class User(AbstractUser):
         unique=True, verbose_name="Email"
     )
 
-    birth_date = models.DateField(
-        blank=True,
-        null=True,
-    )
+    birth_date = models.DateField()
 
     phone_number = models.CharField(
         max_length=25,
