@@ -3,27 +3,6 @@ from django.db import models
 from users.models import User
 
 
-class Commentary(models.Model):
-    author = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        verbose_name='Автор',
-        related_name='commentaries',
-    )
-    content = models.TextField(
-        verbose_name="Текст",
-    )
-    created_at = models.DateTimeField(auto_now_add=True)
-    edited_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f'Комментарий от {self.author}'
-
-    class Meta:
-        verbose_name = "Комментарий"
-        verbose_name_plural = "Комментарии"
-
-
 class Post(models.Model):
     title = models.CharField(
         max_length=100,
@@ -44,14 +23,7 @@ class Post(models.Model):
         verbose_name='Автор',
         related_name='posts',
     )
-    commentary = models.ForeignKey(
-        Commentary,
-        on_delete=models.SET_NULL,
-        verbose_name='Комментарии',
-        related_name='posts',
-        blank=True,
-        null=True
-    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
 
@@ -61,3 +33,35 @@ class Post(models.Model):
     class Meta:
         verbose_name = "Пост"
         verbose_name_plural = "Посты"
+
+
+class Commentary(models.Model):
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Автор',
+        related_name='commentaries',
+    )
+    content = models.TextField(
+        verbose_name="Текст",
+    )
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        verbose_name='Пост',
+        related_name='commentaries',
+        null=True,
+        blank=True,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    edited_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.content} от {self.author}'
+
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
+
+
+
