@@ -7,17 +7,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('post', '0009_alter_commentary_author'),
+        ("post", "0009_alter_commentary_author"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='post',
-            name='commentary',
+            model_name="post",
+            name="commentary",
         ),
         migrations.AddField(
-            model_name='commentary',
-            name='post',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='commentaries', to='post.post', verbose_name='Пост'),
+            model_name="commentary",
+            name="post",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="commentaries",
+                to="post.post",
+                verbose_name="Пост",
+            ),
         ),
     ]

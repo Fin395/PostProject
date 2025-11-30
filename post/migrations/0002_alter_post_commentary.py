@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('post', '0001_initial'),
+        ("post", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='commentary',
-            field=models.ManyToManyField(related_name='posts', to='post.commentary', verbose_name='Комментарии'),
+            model_name="post",
+            name="commentary",
+            field=models.ManyToManyField(
+                related_name="posts", to="post.commentary", verbose_name="Комментарии"
+            ),
         ),
     ]

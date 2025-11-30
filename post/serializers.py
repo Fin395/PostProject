@@ -2,19 +2,22 @@ from rest_framework import serializers
 
 from post.models import Commentary, Post
 from post.validators import PostTitleValidator
+from users.serializers import UserReducedSerializer
 
 
 class CommentarySerializer(serializers.ModelSerializer):
+    author = UserReducedSerializer(read_only=True)
+
     class Meta:
         model = Commentary
-        fields = '__all__'
-        extra_kwargs = {'author': {'read_only': True}}
+        fields = "__all__"
 
 
 class PostSerializer(serializers.ModelSerializer):
+    commentaries = CommentarySerializer(many=True, read_only=True)
+    author = UserReducedSerializer(read_only=True)
+
     class Meta:
         model = Post
-        fields = '__all__'
-        extra_kwargs = {'author': {'read_only': True}, 'commentary': {'many': True}}
-
-        validators = [PostTitleValidator(field='title')]
+        fields = "__all__"
+        validators = [PostTitleValidator(field="title")]

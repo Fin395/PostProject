@@ -20,8 +20,8 @@ class Post(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name='Автор',
-        related_name='posts',
+        verbose_name="Автор",
+        related_name="posts",
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -39,8 +39,8 @@ class Commentary(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name='Автор',
-        related_name='commentaries',
+        verbose_name="Автор",
+        related_name="commentaries",
     )
     content = models.TextField(
         verbose_name="Текст",
@@ -48,18 +48,15 @@ class Commentary(models.Model):
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
-        verbose_name='Пост',
-        related_name='commentaries',
+        verbose_name="Пост",
+        related_name="commentaries",
     )
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.content} от {self.author}'
+        return f"{self.content} от {self.author}"
 
     class Meta:
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарии"
-
-
-

@@ -7,13 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('post', '0010_remove_post_commentary_commentary_post'),
+        ("post", "0010_remove_post_commentary_commentary_post"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='commentary',
-            name='post',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='commentaries', to='post.post', verbose_name='Пост'),
+            model_name="commentary",
+            name="post",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="commentaries",
+                to="post.post",
+                verbose_name="Пост",
+            ),
         ),
     ]

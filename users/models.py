@@ -5,9 +5,7 @@ from django.utils import timezone
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(
-        unique=True, verbose_name="Email"
-    )
+    email = models.EmailField(unique=True, verbose_name="Email")
 
     birth_date = models.DateField()
 
@@ -30,4 +28,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
-    
