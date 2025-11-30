@@ -5,7 +5,7 @@ from post.models import Post, Commentary
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'content', 'author')
+    list_display = ('id', 'title', 'content', 'author', 'author__birth_date')
     list_filter = ('created_at',)
 
 @admin.register(Commentary)

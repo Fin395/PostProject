@@ -18,9 +18,6 @@ class PostTitleValidator:
             raise serializers.ValidationError('The title must not contain the words: ерунда, глупость, чепуха')
 
 
-
-
-
 # class PostAuthorAgeValidator:
 #
 #     def __init__(self, field):
@@ -28,7 +25,7 @@ class PostTitleValidator:
 #
 #     def __call__(self, value):
 #         tmp_value = dict(value).get(self.field)
-#         birthday = datetime.strptime(str(tmp_value), '%d/%m/%Y')
+#         birthday = datetime.strptime(tmp_value, '%d/%m/%Y')
 #         today = date.today()
 #         age = (today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day)))
 #

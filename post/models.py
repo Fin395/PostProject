@@ -44,7 +44,9 @@ class Post(models.Model):
         User,
         on_delete=models.CASCADE,
         verbose_name='Автор',
-        related_name='posts'
+        related_name='posts',
+        blank=True,
+        null=True,
     )
     commentary = models.ForeignKey(
         Commentary,
