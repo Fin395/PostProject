@@ -50,8 +50,6 @@ class Commentary(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Пост',
         related_name='commentaries',
-        null=True,
-        blank=True,
     )
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
