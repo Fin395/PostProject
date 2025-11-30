@@ -11,4 +11,4 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Commentary)
 class CommentaryAdmin(admin.ModelAdmin):
-    list_display = ("id", "content", "author")
+    list_display = ("id", "content", "author", "post")
